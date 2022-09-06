@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.image {
+    width: 90%;
+    height: 75%;
+    border-style: solid;
+    border-color: rgb(21, 247, 0);
+    margin: 1%;
+    object-fit: cover;
+}
+
+.left {
+    width: 40%;
+    border-right: 3px solid rgb(21, 247, 0);
+    height:fit-content;
+}
+
+.right {
+    width: 55%;
+}
+
+.ullist {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.ulPlat {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.ulPlat li {
+    width: 33%;
+}

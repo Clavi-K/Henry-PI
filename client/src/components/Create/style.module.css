@@ -1,0 +1,54 @@
+.hr { 
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid rgb(21, 247, 0);
+    margin: 1em 0; 
+    padding: 0; 
+}
+
+.title {
+    text-align: center;
+}
+
+.form {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(21, 247, 0);
+    padding: 1%;
+    width: 80%;
+    margin: auto;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.field input {
+    background: none;
+    border: 1px solid rgb(21, 247, 0);
+}
+
+.error {
+    color: red;
+}
+
+.hover:hover {
+    background-color: rgb(21, 247, 0);
+    color: black;
+    font-weight: bolder;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.createButton {
+    background: none;
+    border: 1px solid rgb(21, 247, 0);
+    font-size: x-large;
+    margin: 1%;
+}

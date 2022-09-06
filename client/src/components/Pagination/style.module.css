@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.container button {
+    margin-left: 3%;
+    margin-right: 3%;
+    background-color: black;
+    border-style: solid;
+    border-color: rgb(21, 247, 0);
+    border-width: 1px;
+}
+
+.container button:hover {
+    background-color: rgb(21, 247, 0);
+    color: black;
+    font-weight: bolder;
+}

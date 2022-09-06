@@ -1,22 +1,40 @@
-const { Videogame, conn } = require('../../src/db.js');
-const { expect } = require('chai');
+const { conn, Videogame } = require("../../src/db")
 
-describe('Videogame model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
-  describe('Validators', () => {
-    beforeEach(() => Videogame.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        Videogame.create({})
-          .then(() => done(new Error('It requires a valid name')))
-          .catch(() => done());
-      });
-      it('should work when its a valid name', () => {
-        Recipe.create({ name: 'Super Mario Bros' });
-      });
-    });
-  });
-});
+describe("MODEL TEST --------------- Videogame", () => {
+  jest.setTimeout(60000);
+
+  beforeAll(async () => {
+    await conn.sync({ force: true })
+  })
+
+  it("Should throw an error if name is null", async () => {
+
+    try {
+
+      await Videogame.create({})
+
+    } catch (e) {
+      expect(e.message).toBeDefined()
+    }
+
+  })
+
+  it("Should return a videogame when the data is valid", async () => {
+
+    try {
+
+      const response = await Videogame.create({
+        name: "Forza Horizon 5",
+        description: "Carreritas",
+        platforms: "XBOX, PC, PLAYSTATION"
+      })
+
+      expect(response).toHaveProperty("name", "Forza Horizon 5")
+
+    } catch(e) {
+      console.log(e)
+    }
+
+  })
+
+})

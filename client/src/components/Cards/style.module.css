@@ -1,0 +1,66 @@
+.navBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+}
+
+.order {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 10%;
+    justify-content: space-evenly;
+}
+
+.buttonOrder {
+    background-color:  black;
+    border-color: rgb(21, 247, 0);
+    border-width: 1px;
+    border-style: solid;
+    padding: 5%;
+    width: 25%;
+    font-size: large;
+}
+
+.buttonOrder:hover {
+    background-color: rgb(21, 247, 0);
+    color: black;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.create {
+    text-decoration: none;
+    border-style: solid;
+    border-color: rgb(21, 247, 0);
+    border-width: 1px;
+    padding: 1%;
+}
+
+.create:hover {
+    background-color: rgb(21, 247, 0);
+    color: black;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.hr { 
+    display: block; 
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid rgb(21, 247, 0);
+    margin: 1em 0; 
+    padding: 0; 
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

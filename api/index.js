@@ -17,12 +17,22 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+require("dotenv").config({ path: "./src/.env" })
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const { conn } = require("./src/db")
+
+const PORT = process.env.PORT || 8082
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
-  });
-});
+conn.authenticate()
+  .then(() => {
+
+    console.log("Successful database connection!")
+
+    server.listen(PORT, () => {
+      conn.sync({force: true})
+      console.log(`Server is listening at port ${PORT}`)
+    })
+
+  })
+
