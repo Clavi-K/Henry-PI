@@ -62,7 +62,6 @@ async function populateDatabase() {
 
         return await Genre.bulkCreate(formattedArr, {ignoreDuplicates: true})
     } catch (e) {
-        console.log(e)
         throw new Error("Failed to populate database")
     }
 

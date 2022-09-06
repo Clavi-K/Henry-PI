@@ -64,7 +64,7 @@ export default function Create() {
         if (e.target.name === "genre") {
             setFields({ ...fields, genres: [...fields.genres, ""] })
         } else if (e.target.name === "platform") {
-            setFields({ ...fields, platforms: [fields.platforms, ""] })
+            setFields({ ...fields, platforms: [...fields.platforms, ""] })
         }
     }
 
@@ -162,7 +162,7 @@ export default function Create() {
                                 <input type="text"
                                     name={`platform${index}`}
                                     id={index}
-                                    value={p.name}
+                                    value={p}
                                     onChange={dynamicChange}
                                 />
                             </div>)

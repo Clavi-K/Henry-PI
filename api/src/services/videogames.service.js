@@ -97,7 +97,6 @@ module.exports = {
 
             return response
         } catch (e) {
-            console.log(e)
             throw new Error("Failed to post a videogame")
         }
 

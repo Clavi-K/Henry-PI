@@ -27,7 +27,7 @@ async function videogameGenreIntertion(vid, genres) {
 }
 
 async function videogamePlatformInsertion(vid, platforms) {
-
+    
     const databasePlatforms = []
 
     for (const p of platforms) {
