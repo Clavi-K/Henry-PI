@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { filterGenre, filterOrigin, orderHandler } from "../../utils"
+import { filterGenre, filterOrigin, orderHandler, gameSearch } from "../../utils"
 import { getGenres, getVideogames } from "../../redux/actions/actions";
 
 import Card from "../Card/Card"
@@ -31,6 +31,7 @@ export default function Cards() {
     const [filters, setFilters] = useState({ genre: "all", origin: "all", order: { type: "name", way: true } })
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostsPerPage] = useState(15)
+    const [search, setSearch] = useState("")
 
     /* -------------------- */
 
@@ -41,6 +42,10 @@ export default function Cards() {
             ...filters,
             [e.target.name]: e.target.value
         })
+    }
+
+    const searchOnChange = (e) => {
+        setSearch(e.target.value)
     }
 
     const onClick = (e) => {
@@ -71,6 +76,7 @@ export default function Cards() {
         videogames = filterGenre(filters.genre, videogames)
         videogames = filterOrigin(filters.origin, videogames)
         videogames = orderHandler(filters.order, videogames)
+        videogames = gameSearch(search, videogames)
     }
 
     /* ----------PAGINATION---------- */
@@ -90,7 +96,7 @@ export default function Cards() {
                 <div className={`${s.select}`}>
                     <label htmlFor="genre">Filter by genre</label>
 
-                    <select className="background" name="genre" id="Genres" onChange={onChange}>
+                    <select className={`background ${s.selection}`} name="genre" id="Genres" onChange={onChange}>
                         <option className="blackBackground" value="all">All</option>
                         {genres ? genres.map(g => <option className="blackBackground" key={g.name} name="genre" value={g.name} onChange={onChange}>{g.name}</option>) : <p>Something went wrong :c</p>}
                     </select>
@@ -99,7 +105,7 @@ export default function Cards() {
                 <div className={`${s.select}`}>
                     <label htmlFor="origin">Filter by origin</label>
 
-                    <select className="background" name="origin" id="Origin" onChange={onChange}>
+                    <select className={`background ${s.selection}`} name="origin" id="Origin" onChange={onChange}>
                         <option className="blackBackground" value="all" >All</option>
                         <option className="blackBackground" value="api" >From API</option>
                         <option className="blackBackground" value="user" >Created by users</option>
@@ -119,6 +125,8 @@ export default function Cards() {
 
                     <button onClick={onClick} className={`${s.buttonOrder}`} >{filters.order.way ? "⬆" : "⬇"}</button>
                 </div>
+
+                <input className={`${s.search}`} type="text" value={search} name="search" id="search" onChange={searchOnChange} placeholder="Look for a game:" />
 
                 <Link className={`${s.create}`} to="/create">Create a videogame!</Link>
             </nav>

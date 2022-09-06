@@ -10,6 +10,10 @@
     flex-direction: column;
 }
 
+.selection {
+    border: 1px solid rgb(21, 247, 0);
+}
+
 .order {
     display: flex;
     flex-direction: row;
@@ -63,4 +67,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.search {
+    background-color: black;
+    border: 1px solid rgb(21, 247, 0);
 }

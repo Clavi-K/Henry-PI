@@ -6,7 +6,7 @@ export function filterGenre(genre, videogames) {
     if (genre !== "all") {
 
         videogames.map(v => {
-            if(!v.genres) v.genres = v.Genres
+            if (!v.genres) v.genres = v.Genres
             v.genres.map(g => {
                 if (g.name === genre && !genreResult.includes(v)) {
                     genreResult.push(v)
@@ -69,6 +69,10 @@ function orderByRating(ratingOrder, videogames) {
     }
 }
 
+export function gameSearch(input, videogames) {
+    return videogames.filter(v => v.name.includes(input))
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
 /* -----------------------------------------------CREATE METHODS----------------------------------------------- */
@@ -92,11 +96,11 @@ export function validate(obj, names) {
         errors.released = "Invalid date!"
     }
 
-    if(!arrayValidator(obj.genres)) {
+    if (!arrayValidator(obj.genres)) {
         errors.genres = "Missing genres!"
     }
 
-    if(!arrayValidator(obj.platforms)) {
+    if (!arrayValidator(obj.platforms)) {
         errors.platforms = "Missing platforms!"
     }
 
