@@ -46,6 +46,7 @@ export default function Cards() {
 
     const searchOnChange = (e) => {
         setSearch(e.target.value)
+        setCurrentPage(1)
     }
 
     const onClick = (e) => {
