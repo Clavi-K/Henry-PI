@@ -23,7 +23,7 @@ export default function Details() {
                     <div className={`${s.container}`}>
 
                         <div className={`${s.left}`}>
-                            <img className={`${s.image}`} src={`${videogame.background_image? videogame.background_image : img}`} />
+                            <img className={`${s.image}`} src={`${videogame.background_image ? videogame.background_image : img}`} />
 
                             <div>
                                 <h2>Genres:</h2>
@@ -44,7 +44,7 @@ export default function Details() {
                         </div>
 
                         <div className={`${s.right}`}>
-                            <h1>{videogame.name} {videogame.rating ? "⭐" + videogame.rating : "No rating"}</h1>
+                            <h1>{videogame.name} {videogame.rating !== 0 ? "⭐" + videogame.rating : "⭐0: No rating"}</h1>
                             <p>{videogame.description}</p>
                         </div>
 

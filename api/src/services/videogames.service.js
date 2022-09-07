@@ -23,7 +23,7 @@ module.exports = {
                         id: v.id,
                         name: v.name,
                         background_image: v.background_image,
-                        genres: v.genres,
+                        Genres: v.genres,
                         rating: v.rating
                     })
                 )
@@ -77,7 +77,7 @@ module.exports = {
 
     post: async (body) => {
 
-        if (!body.name || !body.description || !body.genres || !body.platforms) {
+        if (!body.name || !body.description || !body.Genres || !body.Platforms) {
             throw new Error("Missing videogame attributes!")
         }
 
@@ -92,8 +92,8 @@ module.exports = {
         try {
             const response = await Videogame.create(obj)
 
-            await videogameGenreIntertion(response, body.genres)
-            await videogamePlatformInsertion(response, body.platforms)
+            await videogameGenreIntertion(response, body.Genres)
+            await videogamePlatformInsertion(response, body.Platforms)
 
             return response
         } catch (e) {

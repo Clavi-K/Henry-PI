@@ -20,8 +20,8 @@ export default function Cards() {
     const error = useSelector(state => state.error)
 
     useEffect(() => {
-        dispatch(getVideogames())
-        dispatch(getGenres())
+        if (!videogames || !videogames.length) dispatch(getVideogames())
+        if (!genres || !genres.length) dispatch(getGenres())
     }, [])
 
     /* --------------------*/
@@ -73,19 +73,17 @@ export default function Cards() {
 
     /* -------------------- */
 
-    if (videogames) {
-        videogames = filterGenre(filters.genre, videogames)
-        videogames = filterOrigin(filters.origin, videogames)
-        videogames = orderHandler(filters.order, videogames)
-        videogames = gameSearch(search, videogames)
-    }
+    videogames = filterGenre(filters.genre, videogames)
+    videogames = filterOrigin(filters.origin, videogames)
+    videogames = orderHandler(filters.order, videogames)
+    videogames = gameSearch(search, videogames)
 
     /* ----------PAGINATION---------- */
 
     const lastPostIndex = currentPage * postsPerPage
     const firstPostIndex = lastPostIndex - postsPerPage
 
-    const currentPosts = videogames ? videogames.slice(firstPostIndex, lastPostIndex) : null
+    const currentPosts = videogames.length ? videogames.slice(firstPostIndex, lastPostIndex) : null
 
     /* -------------------- */
 
@@ -135,7 +133,7 @@ export default function Cards() {
             <hr className={`${s.hr}`} />
 
             <div className={`${s.container}`}>
-                {currentPosts ? currentPosts.map(v => <Card rating={v.rating} key={v.id} id={v.id} background_image={v.background_image} name={v.name} genres={v.genres} />) :
+                {currentPosts ? currentPosts.map(v => <Card key={v.id} id={v.id} background_image={v.background_image} name={v.name} Genres={v.Genres} />) :
                     error ? <h1>{error}</h1> : <h1>(Loading spinner placeholder)</h1>}
             </div>
 

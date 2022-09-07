@@ -17,14 +17,17 @@ export const getDetails = (id) => dispatch => {
 
     return axios.get(`http://localhost:8082/videogames/${id.id}`)
         .then(response => dispatch({ type: GET_DETAILS, payload: response.data }))
-        .catch(response => dispatch({type: ERROR, payload: response.message}))
+        .catch(response => dispatch({ type: ERROR, payload: response.message }))
 
 }
 
 export const postVideogame = (videogame) => dispatch => {
 
     return axios.post("http://localhost:8082/videogames", videogame)
-        .then(response => dispatch({ type: POST_VIDEOGAME, payload: response.data }))
+        .then(response => {
+            dispatch({ type: POST_VIDEOGAME, payload: { ...response.data, Genres: videogame.Genres, } })
+        })
+        .catch(response => dispatch({ type: ERROR, payload: response.message }))
 
 }
 

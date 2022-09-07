@@ -30,7 +30,7 @@ conn.authenticate()
     console.log("Successful database connection!")
 
     server.listen(PORT, () => {
-      conn.sync({force: false})
+      conn.sync({force: true})
       console.log(`Server is listening at port ${PORT}`)
     })
 

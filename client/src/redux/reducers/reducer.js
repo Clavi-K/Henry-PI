@@ -6,10 +6,12 @@ import {
     ERROR
 } from "../actions/actions"
 
+import { arrMerger } from "../../utils"
+
 const initialState = {
-    houses: [],
+    videogames: [],
     genres: [],
-    house: {},
+    game: {},
     error: undefined
 }
 
@@ -21,28 +23,29 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 videogames: action.payload,
-                errror: undefined
+                error: undefined
             }
 
         case GET_DETAILS:
             return {
                 ...state,
                 videogame: action.payload,
-                errror: undefined
+                error: undefined
             }
 
         case POST_VIDEOGAME:
             return {
                 ...state,
-                videgoames: [...state.videogames, action.payload],
-                errror: undefined
+                genres: arrMerger(state.genres, action.payload.Genres),
+                videogames: [...state.videogames, {...action.payload, Genres: genresMock(action.payload.Genres)}],
+                error: undefined
             }
 
         case GET_GENRES:
             return {
                 ...state,
                 genres: action.payload,
-                errror: undefined
+                error: undefined
             }
 
         case ERROR:
@@ -56,6 +59,15 @@ const reducer = (state = initialState, action) => {
 
     }
 
+}
+
+function genresMock(arr) {
+    const result = []
+    for (const el of arr) {
+        result.push({ name: el })
+    }
+
+    return result
 }
 
 export default reducer

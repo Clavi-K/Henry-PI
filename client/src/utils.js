@@ -80,7 +80,7 @@ export function gameSearch(input, videogames) {
 export function validate(obj, names) {
     const errors = {}
 
-    if (names) {
+    if (names.length) {
         if (!obj.name || obj.name.trim().length === 0 || names.includes(obj.name)) {
             errors.name = "Invalid name!"
         }
@@ -96,12 +96,16 @@ export function validate(obj, names) {
         errors.released = "Invalid date!"
     }
 
-    if (!arrayValidator(obj.genres)) {
+    if (!arrayValidator(obj.Genres)) {
         errors.genres = "Missing genres!"
     }
 
-    if (!arrayValidator(obj.platforms)) {
+    if (!arrayValidator(obj.Platforms)) {
         errors.platforms = "Missing platforms!"
+    }
+
+    if(!obj.rating || Number(obj.rating)< 0 || Number(obj.rating)> 5) {
+        errors.rating = "Rating must be between 0 and 5!"
     }
 
     return errors
@@ -134,3 +138,23 @@ function arrayValidator(arr) {
 }
 
 /* ---------------------------------------------------------------------------------------------- */
+
+/* -----------------------------------------------REDUCER METHOD----------------------------------------------- */
+
+export function arrMerger(arr1, arr2) {
+
+    const hashMap = {}
+
+    for (const gn of arr1) {
+        hashMap[gn.name] = true
+    }
+
+    for (const name of arr2) {
+        if (!hashMap[name]) {
+            arr1.push({ name })
+        }
+    }
+
+    return arr1
+
+}

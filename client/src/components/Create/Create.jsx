@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios"
-
-import { getVideogames } from "../../redux/actions/actions";
+import { Link } from "react-router-dom";
+import { getVideogames, postVideogame } from "../../redux/actions/actions";
 import { validate } from "../../utils";
 
 import s from "./style.module.css"
@@ -16,7 +15,7 @@ export default function Create() {
     const names = games ? games.map(v => v.name) : null
 
     useEffect(() => {
-        dispatch(getVideogames())
+        if (!names || !names.length) dispatch(getVideogames())
     }, [])
 
     /*--------------------*/
@@ -30,8 +29,8 @@ export default function Create() {
         released: "",
         rating: "",
         background_image: "",
-        genres: [""],
-        platforms: [""]
+        Genres: [""],
+        Platforms: [""]
     })
 
     /* -------------------- */
@@ -48,11 +47,11 @@ export default function Create() {
         let flag = ""
 
         if (e.target.name.indexOf("genre") !== -1) {
-            dynamicCopy = [...fields.genres]
-            flag = "genres"
+            dynamicCopy = [...fields.Genres]
+            flag = "Genres"
         } else if (e.target.name.indexOf("platform") !== -1) {
-            dynamicCopy = [...fields.platforms]
-            flag = "platforms"
+            dynamicCopy = [...fields.Platforms]
+            flag = "Platforms"
         }
         dynamicCopy[e.target.id] = e.target.value
 
@@ -62,25 +61,23 @@ export default function Create() {
 
     const dynamicAdd = (e) => {
         if (e.target.name === "genre") {
-            setFields({ ...fields, genres: [...fields.genres, ""] })
+            setFields({ ...fields, Genres: [...fields.Genres, ""] })
         } else if (e.target.name === "platform") {
-            setFields({ ...fields, platforms: [...fields.platforms, ""] })
+            setFields({ ...fields, Platforms: [...fields.Platforms, ""] })
         }
     }
 
     const dynamicTake = (e) => {
 
         if (e.target.name === "genre") {
-            if (fields.genres.length > 1) setFields({ ...fields, genres: [...fields.genres.slice(0, fields.genres.length - 1)] })
+            if (fields.Genres.length > 1) setFields({ ...fields, Genres: [...fields.Genres.slice(0, fields.Genres.length - 1)] })
         } else if (e.target.name === "platform") {
-            if (fields.platforms.length > 1) setFields({ ...fields, platforms: [...fields.platforms.slice(0, fields.platforms.length - 1)] })
+            if (fields.Platforms.length > 1) setFields({ ...fields, Platforms: [...fields.Platforms.slice(0, fields.Platforms.length - 1)] })
         }
     }
 
-    const onSubmit = async (e) => {
-        e.preventDefault()
-        await axios.post("http://localhost:8082/videogames", fields)
-        window.location.replace(`http://localhost:3000/games`)
+    const handlePost = (e) => {
+        dispatch(postVideogame(fields))
     }
 
     /*--------------------*/
@@ -93,7 +90,7 @@ export default function Create() {
                 <hr className={`${s.hr}`} />
             </div>
 
-            <form className={`${s.form}`} action="http://localhost:8082/videogames" method="POST" onSubmit={onSubmit}>
+            <div className={`${s.form}`}>
 
                 <div className={`${s.field}`}>
                     <label htmlFor="name">Type the videogame name</label>
@@ -116,7 +113,7 @@ export default function Create() {
                 <div className={`${s.field}`}>
                     <label htmlFor="name">Type the videogame rating</label>
                     <input type="number" name="rating" value={fields.rating} onChange={onChange} min="1" max="5" />
-                    <br />
+                    <p className={`${s.error}`}>{errors.rating ? errors.rating : null}</p>
                 </div>
 
                 <div className={`${s.field}`}>
@@ -128,7 +125,7 @@ export default function Create() {
                     <p>Enter videogame genres</p>
 
                     {
-                        fields.genres.map((g, index) => {
+                        fields.Genres.map((g, index) => {
                             return (<div key={`Genre${index}`}>
                                 <label htmlFor={`genre${index}`}>{`Genre N°${index + 1} `}</label>
 
@@ -155,7 +152,7 @@ export default function Create() {
                     <p>Enter videogame platforms</p>
 
                     {
-                        fields.platforms.map((p, index) => {
+                        fields.Platforms.map((p, index) => {
                             return (<div key={`Platform${index}`}>
                                 <label htmlFor={`platform${index}`}>{`Platform N°${index + 1} `}</label>
 
@@ -179,13 +176,14 @@ export default function Create() {
                 <div className={`${s.buttonContainer}`}>
                     {
                         JSON.stringify(errors) === "{}" && names !== null ?
-                            <input className={`${s.hover} ${s.createButton}`} type="submit" value="Create!" />
+                            //<button className={`${s.hover} ${s.createButton}`} onClick={handlePost}>Create!</button>
+                            <Link to="/games" className={`${s.hover} ${s.createButton}`} onClick={handlePost}>Create!</Link>
                             :
                             null
                     }
                 </div>
 
-            </form>
+            </div>
         </div>
     )
 
