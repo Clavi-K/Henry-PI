@@ -149,9 +149,9 @@ export function arrMerger(arr1, arr2) {
         hashMap[gn.name] = true
     }
 
-    for (const name of arr2) {
-        if (!hashMap[name]) {
-            arr1.push({ name })
+    for (const gnUser of arr2) {
+        if (!hashMap[gnUser.name]) {
+            arr1.push(gnUser)
         }
     }
 

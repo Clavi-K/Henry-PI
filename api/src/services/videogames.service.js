@@ -95,8 +95,9 @@ module.exports = {
             await videogameGenreIntertion(response, body.Genres)
             await videogamePlatformInsertion(response, body.Platforms)
 
-            return response
+            return await Videogame.findOne({ where: { id: response.id }, include: ["Genres", "Platforms"] })
         } catch (e) {
+ 
             throw new Error("Failed to post a videogame")
         }
 

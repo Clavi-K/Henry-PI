@@ -24,9 +24,7 @@ export const getDetails = (id) => dispatch => {
 export const postVideogame = (videogame) => dispatch => {
 
     return axios.post("http://localhost:8082/videogames", videogame)
-        .then(response => {
-            dispatch({ type: POST_VIDEOGAME, payload: { ...response.data, Genres: videogame.Genres, } })
-        })
+        .then(response => dispatch({ type: POST_VIDEOGAME, payload: response.data }))
         .catch(response => dispatch({ type: ERROR, payload: response.message }))
 
 }

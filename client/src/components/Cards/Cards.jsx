@@ -97,7 +97,7 @@ export default function Cards() {
 
                     <select className={`background ${s.selection}`} name="genre" id="Genres" onChange={onChange}>
                         <option className="blackBackground" value="all">All</option>
-                        {genres ? genres.map(g => <option className="blackBackground" key={g.name} name="genre" value={g.name} onChange={onChange}>{g.name}</option>) : <p>Something went wrong :c</p>}
+                        {genres ? genres.map(g => <option className="blackBackground" key={g.name} name="genre" value={g.name} onChange={onChange}>{g.name}</option>) : <option>Something went wrong :c</option>}
                     </select>
                 </div>
 

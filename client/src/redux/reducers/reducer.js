@@ -36,8 +36,8 @@ const reducer = (state = initialState, action) => {
         case POST_VIDEOGAME:
             return {
                 ...state,
+                videogames: [...state.videogames, action.payload],
                 genres: arrMerger(state.genres, action.payload.Genres),
-                videogames: [...state.videogames, {...action.payload, Genres: genresMock(action.payload.Genres)}],
                 error: undefined
             }
 
@@ -59,15 +59,6 @@ const reducer = (state = initialState, action) => {
 
     }
 
-}
-
-function genresMock(arr) {
-    const result = []
-    for (const el of arr) {
-        result.push({ name: el })
-    }
-
-    return result
 }
 
 export default reducer
