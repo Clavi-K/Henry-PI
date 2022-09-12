@@ -12,13 +12,13 @@ export default function Pagination({ totalPosts, postsPerPage, setCurrentPage })
 
     return (
         <div className={`${s.container}`}>
-            <button onClick={() => setCurrentPage((curr) => curr - 1)}>⬅</button>
+            <button onClick={() => setCurrentPage((curr) => { return curr > 1 ? curr - 1 : curr })}>⬅</button>
             {
                 pages.map((p, index) => {
                     return <button key={index} onClick={() => setCurrentPage(p)}>{p}</button>
                 })
             }
-            <button onClick={() => setCurrentPage((curr) => curr + 1)}>➡</button>
+            <button onClick={() => setCurrentPage((curr) => { return curr < pages.length ? curr + 1 : curr })}>➡</button>
         </div>
     )
 

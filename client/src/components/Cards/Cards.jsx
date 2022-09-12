@@ -12,7 +12,7 @@ import s from "./style.module.css"
 
 export default function Cards() {
 
-    /* ----------API THINGS---------- */
+    /* ----------REDUX THINGS---------- */
 
     const dispatch = useDispatch()
     let videogames = useSelector(state => state.videogames)
@@ -42,6 +42,7 @@ export default function Cards() {
             ...filters,
             [e.target.name]: e.target.value
         })
+        setCurrentPage(1)
     }
 
     const searchOnChange = (e) => {
@@ -73,17 +74,19 @@ export default function Cards() {
 
     /* -------------------- */
 
-    videogames = filterGenre(filters.genre, videogames)
-    videogames = filterOrigin(filters.origin, videogames)
-    videogames = orderHandler(filters.order, videogames)
-    videogames = gameSearch(search, videogames)
+    if (videogames) {
+        videogames = filterGenre(filters.genre, videogames)
+        videogames = filterOrigin(filters.origin, videogames)
+        videogames = orderHandler(filters.order, videogames)
+        videogames = gameSearch(search, videogames)
+    }
 
     /* ----------PAGINATION---------- */
 
     const lastPostIndex = currentPage * postsPerPage
     const firstPostIndex = lastPostIndex - postsPerPage
 
-    const currentPosts = videogames.length ? videogames.slice(firstPostIndex, lastPostIndex) : null
+    const currentPosts = videogames && videogames.length ? videogames.slice(firstPostIndex, lastPostIndex) : null
 
     /* -------------------- */
 
@@ -133,8 +136,12 @@ export default function Cards() {
             <hr className={`${s.hr}`} />
 
             <div className={`${s.container}`}>
-                {currentPosts ? currentPosts.map(v => <Card key={v.id} id={v.id} background_image={v.background_image} name={v.name} Genres={v.Genres} />) :
-                    error ? <h1>{error}</h1> : <h1>(Loading spinner placeholder)</h1>}
+                {
+                    currentPosts ? currentPosts.map(v => <Card key={v.id} id={v.id} background_image={v.background_image} name={v.name} Genres={v.Genres} />) :
+                        error ? <h1>{error}</h1> :
+                            !currentPosts && !videogames ? <h1>(Loading spinner placeholder)</h1> :
+                                <h1>No games found :c</h1>
+                }
             </div>
 
             <Pagination totalPosts={videogames ? videogames.length : 0} postsPerPage={postsPerPage} setCurrentPage={setCurrentPage} />

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import s from "./style.module.css"
 import img from "../../img/no_image.jpg"
-import { getDetails } from "../../redux/actions/actions";
+import { emptyDetails, getDetails } from "../../redux/actions/actions";
 
 export default function Details() {
     const id = useParams()
@@ -14,11 +14,12 @@ export default function Details() {
 
     useEffect(() => {
         dispatch(getDetails(id))
+        return dispatch(emptyDetails())
     }, [])
 
     return (<div>
         {
-            videogame ?
+            videogame.name ?
                 <>
                     <div className={`${s.container}`}>
 

@@ -22,7 +22,6 @@ export default function Create() {
 
     /* ---------- LOCAL STATES ---------- */
 
-    const [errors, setErrors] = useState({})
     const [fields, setFields] = useState({
         name: "",
         description: "",
@@ -32,6 +31,7 @@ export default function Create() {
         Genres: [""],
         Platforms: [""]
     })
+    const [errors, setErrors] = useState(validate(fields))
 
     /* -------------------- */
 
@@ -176,7 +176,6 @@ export default function Create() {
                 <div className={`${s.buttonContainer}`}>
                     {
                         JSON.stringify(errors) === "{}" && names !== null ?
-                            //<button className={`${s.hover} ${s.createButton}`} onClick={handlePost}>Create!</button>
                             <Link to="/games" className={`${s.hover} ${s.createButton}`} onClick={handlePost}>Create!</Link>
                             :
                             null

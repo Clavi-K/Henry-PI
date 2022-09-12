@@ -70,6 +70,7 @@ function orderByRating(ratingOrder, videogames) {
 }
 
 export function gameSearch(input, videogames) {
+    if(input.trim(" ") === "") return videogames
     return videogames.filter(v => v.name.includes(input))
 }
 
@@ -80,7 +81,7 @@ export function gameSearch(input, videogames) {
 export function validate(obj, names) {
     const errors = {}
 
-    if (names.length) {
+    if (names && names.length) {
         if (!obj.name || obj.name.trim().length === 0 || names.includes(obj.name)) {
             errors.name = "Invalid name!"
         }

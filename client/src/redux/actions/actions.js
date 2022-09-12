@@ -4,6 +4,7 @@ export const GET_VIDEOGAMES = "GET_VIDEOGAMES"
 export const GET_DETAILS = "GET_DETAILS"
 export const POST_VIDEOGAME = "POST_VIDEOGAME"
 export const GET_GENRES = "GET_GENRES"
+export const EMPTY_DETAILS = "EMPTY_DETAILS"
 export const ERROR = "ERROR"
 
 export const getVideogames = () => dispatch => {
@@ -34,6 +35,10 @@ export const getGenres = () => dispatch => {
     return axios.get("http://localhost:8082/genres")
         .then(response => dispatch({ type: GET_GENRES, payload: response.data.genres }))
 
+}
+
+export const emptyDetails = () => dispatch => {
+    return dispatch({ type: EMPTY_DETAILS, payload: "Delete" })
 }
 
 

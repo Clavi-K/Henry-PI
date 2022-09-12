@@ -3,15 +3,16 @@ import {
     GET_DETAILS,
     GET_GENRES,
     POST_VIDEOGAME,
-    ERROR
+    ERROR,
+    EMPTY_DETAILS
 } from "../actions/actions"
 
 import { arrMerger } from "../../utils"
 
 const initialState = {
-    videogames: [],
+    videogames: undefined,
     genres: [],
-    game: {},
+    videogame: {},
     error: undefined
 }
 
@@ -46,6 +47,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 genres: action.payload,
                 error: undefined
+            }
+
+        case EMPTY_DETAILS:
+            return {
+                ...state,
+                videogame: {}
             }
 
         case ERROR:
